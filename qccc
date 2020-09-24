@@ -5,6 +5,7 @@
 # ./qccc <searched-command>
 #
 
+BASE_PATH=`dirname "$0"`
 if [ ! -z "$1" ]; then
-    grep -i $1 --color=auto cli-call-collection.txt
+    grep -i $1 --color=auto $BASE_PATH/cli-call-collection.txt
 fi
