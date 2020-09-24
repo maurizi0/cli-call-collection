@@ -1,0 +1,10 @@
+#!/bin/sh
+# Query the cli call collcetion
+#
+# Usage:
+# ./qccc <searched-command>
+#
+
+if [ ! -z "$1" ]; then
+    grep -i $1 --color=auto cli-call-collection.txt
+fi
