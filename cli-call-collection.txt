@@ -33,3 +33,9 @@ ntlmrelayx.py -tf <dc-ip.list>
 
 # gobuster fuzz for direcotries with wordlist; -r follow redirects
 gobuster dir -u '<target-url>' -w <path-to-wordlist> -r
+
+# wpscan do a wordpress scan for; vp Vulnerable plugins, cb Config backups, dbe Db exports, u Users, m Media and write the result to <out-file>
+wpscan --url <target-url> -e vp,cb,dbe,u,m -o <out-file>
+
+# wpscan update the plugin db
+wpscan --update
