@@ -31,8 +31,8 @@ Responder.py -I <interface>
 # ntlmrealyx LDAP/SMB... relaying attack; -tf Tagget file; with -t ldap://<ip>, ldaps://<ip>, smb://<ip> single target
 ntlmrelayx.py -tf <dc-ip.list>
 
-# gobuster fuzz for direcotries with wordlist; -r follow redirects
-gobuster dir -u '<target-url>' -w <path-to-wordlist> -r
+# gobuster fuzz for direcotries with wordlist; -o out file, -r follow redirects, -w wordlist
+gobuster dir -u '<target-url>' -o <out-file> -r -w <path-to-wordlist>
 
 # wpscan do a wordpress scan for; vp Vulnerable plugins, cb Config backups, dbe Db exports, u Users, m Media and write the result to <out-file>
 wpscan --url <target-url> -e vp,cb,dbe,u,m -o <out-file>
