@@ -5,7 +5,13 @@
 # ./qccc <searched-command>
 #
 
-BASE_PATH=`dirname "$0"`
+DB_FILENAME=cli-call-collection.txt
+FILE="$(dirname "$(readlink "$0")")/$DB_FILENAME"
+
+if [ ! -f "$FILE" ]; then
+    FILE="$(dirname "$0")/$DB_FILENAME"
+fi
+
 if [ ! -z "$1" ]; then
     grep -i $1 --color=auto $BASE_PATH/cli-call-collection.txt
 fi
