@@ -6,12 +6,12 @@
 #
 
 DB_FILENAME=cli-call-collection.txt
-FILE="$(dirname "$(readlink "$0")")/$DB_FILENAME"
+DB="$(dirname "$(readlink "$0")")/$DB_FILENAME"
 
-if [ ! -f "$FILE" ]; then
-    FILE="$(dirname "$0")/$DB_FILENAME"
+if [ ! -f "$DB" ]; then
+    DB="$(dirname "$0")/$DB_FILENAME"
 fi
 
 if [ ! -z "$1" ]; then
-    grep -i $1 --color=auto $BASE_PATH/cli-call-collection.txt
+    grep -i $1 --color=auto $DB
 fi
