@@ -17,7 +17,7 @@ dirsearch -L <in-list> -t 4
 nikto -Display 1234EP -Tuning 1234bde -o <file-name>.html -Format htm -host '<target-url>'
 
 # cewl generate a password list from a website; -w out file, -d search-dapth 2, -m minimum length 5
-cewl -w <file-name>.txt -d 2 -m 7 <target-url>
+cewl -w <file-name>.txt --with-numbers -d 2 -m 7 <target-url>
 
 # aquatone screenshot all urls in a given file and generate a nice html overview
 cat <urls-in-file> | aquatone -out <out-folder>
