@@ -39,3 +39,6 @@ wpscan --url <target-url> -e vp,cb,dbe,u,m -o <out-file>
 
 # wpscan update the plugin db
 wpscan --update
+
+# hashcat generate a password list with a given start list and a given rule
+hashcat --force --stdout -r <path-to-rule> <in-list>
