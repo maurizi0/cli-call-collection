@@ -54,3 +54,6 @@ smbmap -H <target-ip-or-domain>
 
 # smbmap list authenticated all accesible files
 smbmap -H <target-ip-or-domain> -u <username> -p <password-or-hash> -d <fqdn> -R <share>
+
+# smbmap download file
+smbmap -H <target-ip-or-domain> [-u <username> -p <password-or-hash> -d <fqdn>] --download '.\Path\To\File'
