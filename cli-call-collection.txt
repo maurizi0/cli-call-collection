@@ -43,8 +43,14 @@ wpscan --update
 # hashcat generate a password list with a given start list and a given rule
 hashcat --force --stdout -r <path-to-rule> <in-list>
 
-# Enumerate AD users with GetADUsers.py and password
+# GetADUsers.py enumerate AD users with and password
 GetADUsers.py -all '<fqdn>/<username>:<password>' -dc-ip <dc-ip-address>
 
-# Enumerate AD users with GetADUsers.py and hash
+# GetADUsers.py enumerate AD users with hash
 GetADUsers.py -all '<fqdn>/<username>' -dc-ip <dc-ip-address> -hashes '<LMHASH>:<NTHASH>'
+
+# smbmap list unauthenticated SMB shares with permissions
+smbmap -H <target-ip-or-domain>
+
+# smbmap list authenticated all accesible files
+smbmap -H <target-ip-or-domain> -u <username> -p <password-or-hash> -d <fqdn> -R <share>
