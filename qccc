@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 # Query the cli call collcetion
 #
 # Usage:
@@ -7,11 +7,23 @@
 
 DB_FILENAME=cli-call-collection.txt
 DB="$(dirname "$(readlink "$0")")/$DB_FILENAME"
+QUERY=$1
+ARGV="${@:2}"
+
+function usage {
+	echo "Usage:    qccc <query-string> [additional grep arguments]"
+	echo "Example:  qccc kerberoast -A1"
+}
 
 if [ ! -f "$DB" ]; then
     DB="$(dirname "$0")/$DB_FILENAME"
 fi
 
-if [ ! -z "$1" ]; then
-    grep -i $1 --color=auto $DB
+if [ ! -z "$QUERY" ]; then
+    grep -i "$QUERY" --color=auto $DB $ARGV || usage
+else
+	usage
 fi
+
+
+
