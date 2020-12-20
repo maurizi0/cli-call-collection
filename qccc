@@ -11,6 +11,7 @@ QUERY=$1
 ARGV="${@:2}"
 
 function usage {
+	echo ""
 	echo "Usage:    qccc <query-string> [additional grep arguments]"
 	echo "Example:  qccc kerberoast -A1"
 }
