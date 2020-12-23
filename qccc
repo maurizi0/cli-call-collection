@@ -11,9 +11,9 @@ QUERY=$1
 ARGV="${@:2}"
 
 function usage {
-	echo ""
-	echo "Usage:    qccc <query-string> [additional grep arguments]"
-	echo "Example:  qccc kerberoast -A1"
+	echo "# "
+	echo "# Usage:    qccc <query-string> [additional grep arguments]"
+	echo "# Example:  qccc kerberoast -A1"
 }
 
 if [ ! -f "$DB" ]; then
@@ -21,7 +21,8 @@ if [ ! -f "$DB" ]; then
 fi
 
 if [ ! -z "$QUERY" ]; then
-    grep -s -i "$QUERY" --color=auto $DB $ARGV | echo "# No results found or invalid query"
+	echo "# Found $(grep -i -c $QUERY $DB) results:"
+    grep -i "$QUERY" --color=auto $DB $ARGV 
 else
 	usage
 fi
