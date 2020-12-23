@@ -81,3 +81,6 @@ ldapsearch -x -H ldap://<dc-ip> -b '' -s base '(objectclass=*)'
 
 # ldapsearch raw raw AD users from DC anonymously
 ldapsearch -x -H ldap://<dc-ip> -b 'DC=<domain>,DC=<domain-suffix>' '(objectClass=person)'
+
+# rpcclient interactive session; -U <user>; -N anonymous login
+rpcclient [-U <user>| -N] <target-ip-or-domain>
