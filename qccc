@@ -21,7 +21,7 @@ if [ ! -f "$DB" ]; then
 fi
 
 if [ ! -z "$QUERY" ]; then
-    grep -i "$QUERY" --color=auto $DB $ARGV || usage
+    grep -s -i "$QUERY" --color=auto $DB $ARGV | echo "# No results found or invalid query"
 else
 	usage
 fi
