@@ -11,7 +11,7 @@ msfvenom -l payloads
 wfuzz --hw <word-count> -f <out-file> -w <wordlist> 'https://target.url?param1=FUZZ&param2=42'
 
 # dirsearch with standard wordlist; -b scan domain not ip; -F follow redirects; -r recourse; -R <l> search recourseive with level <l>
-dirsearch -u '<target-url>' -b -F -r -R <l> --plain-text-report <out-file>
+dirsearch -u '<target-url>' -b -F -r -R <l> --csv-report <out-file>.csv
 
 # dirsearch with input list and 4 thrads
 dirsearch -L <in-list> -t 4
@@ -34,8 +34,8 @@ Responder.py -I <interface>
 # ntlmrealyx LDAP/SMB... relaying attack; -tf Tagget file; with -t ldap://<ip>, ldaps://<ip>, smb://<ip> single target
 ntlmrelayx.py -tf <dc-ip.list>
 
-# gobuster fuzz for direcotries with wordlist; -o out file, -r follow redirects, -w wordlist
-gobuster dir -u '<target-url>' -o <out-file> -r -w <path-to-wordlist>
+# gobuster fuzz for direcotries with wordlist; -o out file, -r follow redirects, -w wordlist, -x file extensions to append
+gobuster dir -u '<target-url>' -o <out-file> -r -w <path-to-wordlist> [-x php,aspx,html,txt]
 
 # wpscan do a wordpress scan for; vp Vulnerable plugins, cb Config backups, dbe Db exports, u Users, m Media and write the result to <out-file>
 wpscan --url <target-url> -e vp,cb,dbe,u,m -o <out-file>
