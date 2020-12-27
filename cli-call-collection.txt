@@ -4,13 +4,13 @@ cat <urls-in-file> | aquatone -out <out-folder>
 # bloodhound-python BloodHound ingestor
 bloodhound-python -u '<username>' -p 'password' -dc <dc-hostname> -d <fqdn> -c ALL [--hashes 'LM:NLTM'] [-ns <name-server-ip-to-use>]
 
-# cewl generate a password list from a website; -w out file, -d search-dapth 2, -m minimum length 5
+# cewl generate a password list from a website; -w out file, -d search-depth 2, -m minimum length 5
 cewl -w <file-name>.txt --with-numbers -d 2 -m 7 <target-url>
 
-# dirsearch with input list and 4 thrads
-dirsearch -L <in-list> -t 4
+# dirsearch with input target list and <t> threads
+dirsearch -L <target-list> -t <t>
 
-# dirsearch with standard wordlist; -b scan domain not ip; -F follow redirects; -r recourse; -R <l> search recourseive with level <l>
+# dirsearch with standard wordlist; -b scan domain not ip; -F follow redirects; -r recourse; -R <l> search recursive with level <l>
 dirsearch -u '<target-url>' -b -F -r -R <l> --csv-report <out-file>.csv
 
 # evil-winrm interactive shell with username and password
@@ -28,8 +28,11 @@ GetNPUsers.py '<fqdn>/[<username>]'  -dc-ip <dc-ip> [-request -outputfile <out-f
 # GetUserSPNs.py get user accounts with more than one service principal name (= kerberoastable) and request a TGS for them
 GetUserSPNs.py '<fqdn>/<user>:<password>' -dc-ip <dc-ip> [-request -outputfile <out-file>]
 
-# gobuster fuzz for direcotries with wordlist; -o out file, -r follow redirects, -k ignore ssl certificate errors, -w wordlist, -x file extensions to append
+# gobuster fuzz for directories with wordlist; -o out file, -r follow redirects, -k ignore ssl certificate errors, -w wordlist, -x file extensions to append
 gobuster dir -u '<target-url>' -o <out-file> -r -k -w <path-to-wordlist> [-x php,aspx,html,txt]
+
+# hashcat show examples hashes to find the correct mode
+hashcat --example-hashes
 
 # hashcat generate a password list with a given start list and a given rule
 hashcat --force --stdout -r <path-to-rule> <in-list>
@@ -61,7 +64,7 @@ ntlmrelayx.py -tf <dc-ip.list>
 # psexec interactive shell as Administrator with username and password or with hashes
 psexec.py '<fqdn>/<username>[:<password>]@<target-ip-or-host>' [-hashes LMHASH:NTHASH] [-dc-ip <dc-ip>]
 
-# Responder.py analyze mode; Listen for packeges and list them on screen
+# Responder.py analyze mode; Listen for packages and list them on screen
 Responder.py -I <interface> -A
 
 # Responder.py start spoofing attack
@@ -79,13 +82,13 @@ smbclient -L <ip-or-hostname> [-N | -U <user>]
 # smbmap download file
 smbmap -H <target-ip-or-domain> [-u <username> -p <password-or-hash> -d <fqdn>] --download '.\Path\To\File'
 
-# smbmap list authenticated all accesible files
+# smbmap list authenticated all accessible files
 smbmap -H <target-ip-or-domain> -u <username> -p <password-or-hash> -d <fqdn> -R <share>
 
 # smbmap list unauthenticated SMB shares with permissions
 smbmap -H <target-ip-or-domain>
 
-# wfuzz fuzz a get parameter with; -f out file; --hw hide response with word count; --hh hide response with character count; --hc <code> hide responsecode <code>
+# wfuzz fuzz a get parameter with; -f out file; --hw hide response with word count; --hh hide response with character count; --hc <code> hide response code <code>
 wfuzz --hw <word-count> -f <out-file> -w <wordlist> 'https://target.url?param1=FUZZ&param2=42'
 
 # wpscan do a wordpress scan for; vp Vulnerable plugins, cb Config backups, dbe Db exports, u Users, m Media and write the result to <out-file>
