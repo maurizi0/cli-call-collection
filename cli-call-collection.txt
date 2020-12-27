@@ -87,3 +87,9 @@ ldapsearch -x -H ldap://<dc-ip> -b 'DC=<domain>,DC=<domain-suffix>' '(objectClas
 
 # rpcclient interactive session; -U <user>; -N anonymous login
 rpcclient [-U <user>| -N] <target-ip-or-domain>
+
+# smbclient list shares; -L list shares; -N anonymous auth; -U user;
+smbclient -L <ip-or-hostname> [-N | -U <user>]
+
+# smbclient interactive smb connection; -W domain; -U user name
+smbclient \\\\<ip-or-hostname>\\<share-name> [-W <domain-name> -U <user>]
