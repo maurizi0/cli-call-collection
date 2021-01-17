@@ -37,6 +37,9 @@ hashcat --example-hashes
 # hashcat generate a password list with a given start list and a given rule
 hashcat --force --stdout -r <path-to-rule> <in-list>
 
+# hydra brute force different protocols; -V show all attempts; -t number of threads; protocol can be [ssh|rdp|ftp|imap|mssql|mysql|oracle-*|smtp|smb|vnc|...] 
+hydra -V [-t <threads>] -L <user-file> -P <password-file> <protocol>://<target.ip>
+
 # ldapdomaindump dump the domain ldap info human readable as html and json
 ldapdomaindump -u '<fqdn>\<username>' -p '<password-or-LM:NTLM-hash>' -o <outfolder> <dc-ip>
 
