@@ -83,7 +83,7 @@ secretsdump.py '<fqdn">/<username>:<password>@<target-ip-or-hostname>' <dc-ip> -
 secretsdump -sam <path-to-sam> -system <path-to-system> -security <path-to-security> LOCAL -outputfile <out-file>
 
 # smbclient interactive smb connection; -W domain; -U user name
-smbclient.py \\\\<ip-or-hostname>\\<share-name> [-W <domain-name> -U <user>]
+smbclient \\\\<ip-or-hostname>\\<share-name> [-W <domain-name> -U <user>]
 
 # smbclient list shares; -L list shares; -N anonymous auth; -U user;
 smbclient -L <ip-or-hostname> [-N | -U <user>]
