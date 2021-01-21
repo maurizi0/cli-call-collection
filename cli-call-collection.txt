@@ -8,10 +8,10 @@ bloodhound-python -u '<username>' -p 'password' -dc <dc-hostname> -d <fqdn> -c A
 cewl -w <file-name>.txt --with-numbers -d 2 -m 7 <target-url>
 
 # dirsearch with input target list and <t> threads
-dirsearch -L <target-list> -t <t>
+dirsearch -L <target-list> -t --full-url <t>
 
-# dirsearch with standard wordlist; -b scan domain not ip; -F follow redirects; -r recourse; -R <l> search recursive with level <l>
-dirsearch -u '<target-url>' -b -F -r -R <l> --csv-report <out-file>.csv
+# dirsearch with standard wordlist; -b scan domain not ip; -F follow redirects; -r recourse; -R <l> search recursive with level <l>; --full-url full url in report
+dirsearch -u '<target-url>' -b -F -r -R <l> --full-url --csv-report <out-file>.csv
 
 # evil-winrm interactive shell with username and password
 evil-winrm -i <target-ip> -u <username> -p <password>
