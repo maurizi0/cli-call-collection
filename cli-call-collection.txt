@@ -38,7 +38,16 @@ hashcat --example-hashes
 hashcat --force --stdout -r <path-to-rule> <in-list>
 
 # hydra brute force different protocols; -V show all attempts; -t number of threads; protocol can be [ssh|rdp|ftp|imap|mssql|mysql|oracle-*|smtp|smb|vnc|...] 
-hydra -V [-t <threads>] -L <user-file> -P <password-file> <protocol>://<target.ip>
+hydrb -V [-t <threads>] -L <user-file> -P <password-file> <protocol>://<target.ip>
+
+# kerbrute bruteforce; -dc dc ip; -d fqdn; -o outfile; -v verbose; list of usernames and passwords separated by ":" ;
+kerbrute bruteforce --dc <dc-ip> -d <fqdn> -o <out-file> [-v] <list-users-passwords-separeted-with-:>
+
+# kerbrute passwordspray; -dc dc ip; -d fqdn; -o outfile; -v verbose; list of usernames; password to try
+kerbrute passwordspray --dc <dc-ip> -d <fqdn> -o <out-file> [-v] <username-list> <password-to-try>
+
+# kerbrute userenum enumerate usernames; --dc dc ip; -d fqdn; -o outfile; -v verbose; name list
+kerbrute userenum --dc <dc-ip> -d <fqdn> -o <out-file> [-v] <name-list>
 
 # ldapdomaindump dump the domain ldap info human readable as html and json
 ldapdomaindump -u '<fqdn>\<username>' -p '<password-or-LM:NTLM-hash>' -o <outfolder> <dc-ip>
