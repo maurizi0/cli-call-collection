@@ -38,7 +38,7 @@ hashcat --example-hashes
 hashcat --force --stdout -r <path-to-rule> <in-list>
 
 # hydra brute force different protocols; -V show all attempts; -t number of threads; protocol can be [ssh|rdp|ftp|imap|mssql|mysql|oracle-*|smtp|smb|vnc|...] 
-hydrb -V [-t <threads>] -L <user-file> -P <password-file> <protocol>://<target.ip>
+hydra -V [-t <threads>] -L <user-file> -P <password-file> <protocol>://<target.ip>
 
 # kerbrute bruteforce; -dc dc ip; -d fqdn; -o outfile; -v verbose; list of usernames and passwords separated by ":" ;
 kerbrute bruteforce --dc <dc-ip> -d <fqdn> -o <out-file> [-v] <list-users-passwords-separeted-with-:>
@@ -105,6 +105,9 @@ smbmap -H <target-ip-or-domain> -u <username> -p <password-or-hash> -d <fqdn> -R
 
 # smbmap list unauthenticated SMB shares with permissions
 smbmap -H <target-ip-or-domain>
+
+# smbserver.py start an impacket smb server
+smbserver.py -username <username> -password <password> -smb2support <sharename> <path-to-mount-folder>
 
 # wfuzz fuzz a get parameter with; -f out file; --hw hide response with word count; --hh hide response with character count; --hc <code> hide response code <code>
 wfuzz --hw <word-count> -f <out-file> -w <wordlist> 'https://target.url?param1=FUZZ&param2=42'
