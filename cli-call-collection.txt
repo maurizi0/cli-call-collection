@@ -13,8 +13,8 @@ dirsearch -L <target-list> -t --full-url <t>
 # dirsearch with standard wordlist; -b scan domain not ip; -F follow redirects; -r recourse; -R <l> search recursive with level <l>; --full-url full url in report
 dirsearch -u '<target-url>' -b -F -r -R <l> --full-url --csv-report <out-file>.csv
 
-# evil-winrm interactive shell with username and password
-evil-winrm -i <target-ip> -u <username> -p <password>
+# evil-winrm interactive shell with username and password or hash
+evil-winrm -i <target-ip> -u <username> [-p <password> | -H <hash>]
 
 # GetADUsers.py enumerate AD users with and password
 GetADUsers.py -all '<fqdn>/[<username>:<password>]' -dc-ip <dc-ip-address>
