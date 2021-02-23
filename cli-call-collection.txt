@@ -7,8 +7,8 @@ bloodhound-python -u '<username>' -p 'password' -dc <dc-hostname> -d <fqdn> -c A
 # cewl generate a password list from a website; -w out file, -d search-depth 2, -m minimum length 5
 cewl -w <file-name>.txt --with-numbers -d 2 -m 7 <target-url>
 
-# dirsearch with input target list and <t> threads
-dirsearch -L <target-list> -t --full-url <t>
+# dirsearch with input target list -l
+dirsearch -- <target-list> --full-url
 
 # dirsearch with standard wordlist; -b scan domain not ip; -F follow redirects; -r recourse; -R <l> search recursive with level <l>; --full-url full url in report
 dirsearch -u '<target-url>' -b -F -r -R <l> --full-url --csv-report <out-file>.csv
@@ -112,8 +112,8 @@ smbserver.py [-username <username> -password <password>] <sharename> <path-to-mo
 # wfuzz fuzz a get parameter with; -f out file; --hw hide response with word count; --hh hide response with character count; --hc <code> hide response code <code>
 wfuzz --hw <word-count> -f <out-file> -w <wordlist> 'https://target.url?param1=FUZZ&param2=42'
 
-# wpscan do a wordpress scan for; vp Vulnerable plugins, cb Config backups, dbe Db exports, u Users, m Media and write the result to <out-file>
-wpscan --url <target-url> -e vp,cb,dbe,u,m -o <out-file>
+# wpscan do a wordpress scan for; vp vulnerable plugins, vt Vulnerable themes, cb Config backups, dbe Db exports, u Users and write the result to <out-file>
+wpscan --url <target-url> -e vp,vt,cb,dbe,u -o <out-file>
 
 # wpscan update the plugin db
 wpscan --update
