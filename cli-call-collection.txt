@@ -16,6 +16,9 @@ dirsearch -u '<target-url>' -b -F -r -R <l> --full-url --csv-report <out-file>.c
 # evil-winrm interactive shell with username and password or hash
 evil-winrm -i <target-ip> -u <username> [-p <password> | -H <hash>]
 
+# ffuf keyword FUZZ in a request file; --request the request file; -w path to wordlist; -t threads; -f[clrsw] filter code,lines,regex,size,words; -m[clrsw] match  
+ffuf --request <req-file> -w <wordlist> -t <t> -fs <filter-size> --replay-proxy http://127.0.0.1:8080
+
 # GetADUsers.py enumerate AD users with and password
 GetADUsers.py -all '<fqdn>/[<username>:<password>]' -dc-ip <dc-ip-address>
 
