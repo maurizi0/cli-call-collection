@@ -55,6 +55,9 @@ kerbrute userenum --dc <dc-ip> -d <fqdn> -o <out-file> [-v] <name-list>
 # ldapdomaindump dump the domain ldap info human readable as html and json
 ldapdomaindump -u '<fqdn>\<username>' -p '<password-or-LM:NTLM-hash>' -o <outfolder> <dc-ip>
 
+# ldapsaerch get naming contexts
+ldapsearch -h <dc-ip> -x -s base namingcontexts
+
 # ldapsearch dump raw AD information from DC anonymously
 ldapsearch -x -H ldap://<dc-ip> -b '' -s base '(objectclass=*)'
 
