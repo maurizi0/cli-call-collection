@@ -11,7 +11,7 @@ cewl -w <file-name>.txt --with-numbers -d 2 -m 7 <target-url>
 dirsearch -l <target-list> --full-url
 
 # dirsearch with standard wordlist; -b scan domain not ip; -F follow redirects; -r recourse with depth <l>; --full-url full url in report
-dirsearch -u '<target-url>' -b -F -r --recursion-depth=<l> --full-url --format=csv -o <out-file>.csv
+dirsearch -u '<target-url>' -b -F -r --recursion-depth=<l> --full-url -o <out-file>.out
 
 # evil-winrm interactive shell with username and password or hash
 evil-winrm -i <target-ip> -u <username> [-p <password> | -H <hash>]
