@@ -6,7 +6,7 @@
 #
 
 DB_FILENAME=cli-call-collection.txt
-DB="$(dirname "$(readlink "$0")")/$DB_FILENAME"
+DB="$(dirname "$(readlink -f "$0")")/$DB_FILENAME"
 QUERY=$1
 ARGV="${@:2}"
 
@@ -22,7 +22,7 @@ fi
 
 if [ ! -z "$QUERY" ]; then
 	echo "# Found $(grep -i -c $QUERY $DB) results:"
-    grep -i "$QUERY" --color=auto $DB $ARGV 
+    grep -i "$QUERY" --color=auto $DB $ARGV
 else
 	usage
 fi
